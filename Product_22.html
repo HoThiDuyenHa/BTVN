@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #table {
+            width: 100%;
+           
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="frm">
+            <p>Product Name:</p>
+            <input type="text" name="pname" id="pname">
+
+            <p>Product Quantity:</p>
+            <input type="number" name="pqty" id="pqty">
+
+            <p>Product Price:</p>
+            <input type="number" name="price" id="price">
+        </form>
+        <button type="button" onclick="add()">Thêm</button>
+        <button type="button" onclick="total()">Tổng cộng</button>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>price</th>
+                    <th>Sub_total</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Tổng cộng</td>
+                    <td id="total">0</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script>
+        var id = 0;
+        var sumtotal = 0;
+        
+        function add() {
+            id++;
+            var pname = document.getElementById("pname").value;
+            var qty = document.getElementById("pqty").value;
+            var price = document.getElementById("price").value;
+            var sub = qty * price;
+            sumtotal += sub;
+            
+            var row = "<tr>";
+            row += "<td>" + id + "</td>";
+            row += "<td>" + pname + "</td>";
+            row += "<td>" + qty + "</td>";
+            row += "<td>" + price + "</td>";
+            row += "<td>" + sub + "</td>";
+            row += "</tr>";
+            
+            document.getElementById("tbody").innerHTML += row;
+            
+            // Xóa các trường nhập liệu
+            document.getElementById("pname").value = '';
+            document.getElementById("pqty").value = '';
+            document.getElementById("price").value = '';
+        }
+        
+        function total() {
+            document.getElementById("total").innerText = sumtotal;
+        }
+    </script>
+</body>
+</html>
